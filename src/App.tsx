@@ -1,4 +1,5 @@
 import { Grid, GridItem } from "@chakra-ui/react";
+import NavBar from "./components/ui/NavBar.tsx";
 
 function App() {
   return (
@@ -10,11 +11,11 @@ function App() {
         }}
         gridTemplateRows={{ base: "60px 1fr", md: "60px 1fr" }}
         gridTemplateColumns={{ base: "1fr", md: "200px 1fr" }} // mobile: single column
-        gap="4"
+        gap="0"
         h="100vh"
       >
-        <GridItem area={"nav"} bg="blue.300">
-          Navigation
+        <GridItem area={"nav"}>
+          <NavBar />
         </GridItem>
         <GridItem
           area={"aside"}
