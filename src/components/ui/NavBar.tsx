@@ -1,5 +1,6 @@
-import { HStack, Image, Text } from "@chakra-ui/react";
+import { Flex, HStack, Image, Text } from "@chakra-ui/react";
 import logo from "../../assets/logo.webp";
+import { ColorModeButton, ColorModeIcon } from "./color-mode";
 
 const NavBar = () => {
   return (
@@ -8,6 +9,9 @@ const NavBar = () => {
       <Text fontSize="2xl" fontWeight="bold">
         Game Hub
       </Text>
+      <Flex justify="flex-end" flex="1">
+        <ColorModeButton />
+      </Flex>
     </HStack>
   );
 };
