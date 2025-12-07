@@ -27,6 +27,7 @@ const useGames = () => {
         );
         const data = await response.json();
         setGames((data.results as Game[]) || []);
+        setLoading(false);
       } catch (err) {
         setError("Failed to fetch games");
       } finally {

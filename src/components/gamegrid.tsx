@@ -35,6 +35,8 @@ const GameGrid = () => {
   //   return <div>Loading...</div>;
   // }
   const { games, error, loading } = useGames();
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
   return (
     <>
       {loading && <div>Loading...</div>}
@@ -45,6 +47,16 @@ const GameGrid = () => {
           gap={10}
           padding="20px"
         >
+          {loading &&
+            skeletons.map((skeleton) => (
+              <GameCard
+                key={skeleton}
+                game={{
+                  id: skeleton,
+                  name: "Loading...",
+                }}
+              />
+            ))}
           {games.map((game) => (
             <GameCard key={game.id} game={game} />
             // <div key={game.id}>
