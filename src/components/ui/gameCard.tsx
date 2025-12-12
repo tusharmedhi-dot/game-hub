@@ -14,7 +14,7 @@ const GameCard = ({ game }: GameCardProps) => {
     <CardRoot>
       {/* <h2>{game.name}</h2> */}
       <img
-        src={getCroppedImageUrl(game.background_image || "")}
+        src={getCroppedImageUrl(game.background_image || "null")}
         alt={game.name}
       />
       <CardBody overflow="hidden" borderRadius={10}>
@@ -26,9 +26,6 @@ const GameCard = ({ game }: GameCardProps) => {
           />
           <CriticScore score={game.metacritic} />
         </HStack>
-        {/* {game.parent_platforms && (
-          <pla
-        )} */}
       </CardBody>
     </CardRoot>
   );

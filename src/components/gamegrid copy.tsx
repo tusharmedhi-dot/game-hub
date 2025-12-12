@@ -35,41 +35,45 @@ const GameGrid = () => {
   // if (games.length === 0) {
   //   return <div>Loading...</div>;
   // }
-  const { data, error, loading } = useGames();
+  const { games, error, loading } = useGames();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <>
       {loading && <div>Loading...</div>}
       {error && <div>{error}</div>}
-      <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
-        gap={10}
-        padding="20px"
-      >
-        {loading &&
-          skeletons.map((skeleton) => (
-            <GameCardContainer key={skeleton}>
-              <GameCard
-                key={skeleton}
-                game={{
-                  id: skeleton,
-                  name: "Loading...",
-                }}
-              />
+      {games.map((game) => (
+        // <div>
+        <SimpleGrid
+          columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
+          gap={10}
+          padding="20px"
+        >
+          {loading &&
+            skeletons.map((skeleton) => (
+              <GameCardContainer key={skeleton}>
+                <GameCard
+                  key={skeleton}
+                  game={{
+                    id: skeleton,
+                    name: "Loading...",
+                  }}
+                />
+              </GameCardContainer>
+            ))}
+          {games.map((game) => (
+            <GameCardContainer key={game.id}>
+              <GameCard key={game.id} game={game} />
             </GameCardContainer>
-          ))}
-        {data.map((game) => (
-          <GameCardContainer key={game.id}>
-            <GameCard key={game.id} game={game} />
-          </GameCardContainer>
 
-          // <div key={game.id}>
-          //   <h2>{game.name}</h2>
-          //   <img src={game.background_image} alt={game.name} width="200" />
-          // </div>
-        ))}
-      </SimpleGrid>
+            // <div key={game.id}>
+            //   <h2>{game.name}</h2>
+            //   <img src={game.background_image} alt={game.name} width="200" />
+            // </div>
+          ))}
+        </SimpleGrid>
+        // </div>
+      ))}
     </>
   );
 };

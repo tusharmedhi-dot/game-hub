@@ -1,6 +1,8 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import NavBar from "./components/ui/NavBar.tsx";
 import GameGrid from "./components/gamegrid.tsx";
+import GenreList from "./components/ui/GenreList.tsx";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -20,10 +22,9 @@ function App() {
         </GridItem>
         <GridItem
           area={"aside"}
-          bg="green.300"
           display={{ base: "none", lg: "block" }} // hide on small screens
         >
-          Sidebar
+          <GenreList />
         </GridItem>
         {/* <GridItem area={"main"} bg="orange.300"></GridItem> */}
         <GridItem area={"main"}>

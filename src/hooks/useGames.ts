@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useData from "./useData";
 
 export interface Platform {
   id: number;
@@ -14,29 +15,6 @@ export interface Game {
   metacritic?: number;
 }
 
-const useGames = () => {
-  const [games, setGames] = useState<Game[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const response = await fetch(
-          "https://api.rawg.io/api/games?key=12811374eced43dbb6731e6d86bfb390"
-        );
-        const data = await response.json();
-        setGames((data.results as Game[]) || []);
-        setLoading(false);
-      } catch (err) {
-        setError("Failed to fetch games");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchGames();
-  }, []);
-  return { games, error, loading };
-};
+const useGames = () => useData<Game>("/games");
 
 export default useGames;

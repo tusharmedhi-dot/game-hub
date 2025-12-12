@@ -1,6 +1,6 @@
 import { Flex, HStack, Image, Text } from "@chakra-ui/react";
 import logo from "../../assets/logo.webp";
-import { ColorModeButton, ColorModeIcon } from "./color-mode";
+import { ColorModeButton } from "./color-mode";
 
 const NavBar = () => {
   return (
