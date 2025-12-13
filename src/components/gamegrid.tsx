@@ -2,6 +2,7 @@ import useGames from "@/hooks/useGames";
 import { SimpleGrid } from "@chakra-ui/react";
 import GameCard from "./ui/gameCard";
 import GameCardContainer from "./ui/GameCardContainer";
+import type { Genre } from "@/hooks/useGenre";
 
 // interface Game {
 //   id: number;
@@ -9,7 +10,11 @@ import GameCardContainer from "./ui/GameCardContainer";
 //   background_image?: string;
 // }
 
-const GameGrid = () => {
+interface GameGridProps {
+  selectedGenre: Genre | null;
+}
+
+const GameGrid = ({ selectedGenre }: GameGridProps) => {
   // const [games, setGames] = React.useState<Game[]>([]);
   // const [error, setError] = React.useState<string | null>(null);
 
@@ -35,7 +40,7 @@ const GameGrid = () => {
   // if (games.length === 0) {
   //   return <div>Loading...</div>;
   // }
-  const { data, error, loading } = useGames();
+  const { data, error, loading } = useGames(selectedGenre);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
@@ -51,7 +56,6 @@ const GameGrid = () => {
           skeletons.map((skeleton) => (
             <GameCardContainer key={skeleton}>
               <GameCard
-                key={skeleton}
                 game={{
                   id: skeleton,
                   name: "Loading...",
@@ -61,7 +65,7 @@ const GameGrid = () => {
           ))}
         {data.map((game) => (
           <GameCardContainer key={game.id}>
-            <GameCard key={game.id} game={game} />
+            <GameCard game={game} />
           </GameCardContainer>
 
           // <div key={game.id}>
