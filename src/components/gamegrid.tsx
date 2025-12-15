@@ -4,6 +4,7 @@ import GameCard from "./ui/gameCard";
 import GameCardContainer from "./ui/GameCardContainer";
 import type { Genre } from "@/hooks/useGenre";
 import type { Platform } from "@/hooks/usePlatforms";
+import type { GameQuery } from "@/App";
 
 // interface Game {
 //   id: number;
@@ -12,37 +13,16 @@ import type { Platform } from "@/hooks/usePlatforms";
 // }
 
 interface GameGridProps {
-  selectedGenre: Genre | null;
-  selectedPlatform: Platform | null;
+  gameQuery: GameQuery;
+  // selectedGenre: Genre | null;
+  // selectedPlatform: Platform | null;
 }
 
-const GameGrid = ({ selectedGenre, selectedPlatform }: GameGridProps) => {
+const GameGrid = ({ gameQuery }: GameGridProps) => {
   // const [games, setGames] = React.useState<Game[]>([]);
   // const [error, setError] = React.useState<string | null>(null);
 
-  // useEffect(() => {
-  //   const fetchGames = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         "https://api.rawg.io/api/games?key=12811374eced43dbb6731e6d86bfb390"
-  //       );
-  //       const data = await response.json();
-  //       setGames((data.results as Game[]) || []);
-  //     } catch (err) {
-  //       setError("Failed to fetch games");
-  //     }
-  //   };
-
-  //   fetchGames();
-  // }, []);
-
-  // if (error) {
-  //   return <div>{error}</div>;
-  // }
-  // if (games.length === 0) {
-  //   return <div>Loading...</div>;
-  // }
-  const { data, error, loading } = useGames(selectedGenre, selectedPlatform);
+  const { data, error, loading } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
