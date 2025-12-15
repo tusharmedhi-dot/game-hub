@@ -29,7 +29,7 @@ const useData = <T>(
         const url =
           "https://api.rawg.io/api" + endpoint + "?" + searchParams.toString();
 
-        //console.log("Fetching URL:", url); // <--- ADD THIS LINE
+        console.log("Fetching URL:", url); // <--- ADD THIS LINE
 
         // 2. Perform the Fetch Request
         const response = await fetch(url, {

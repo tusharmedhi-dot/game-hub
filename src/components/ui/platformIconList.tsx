@@ -6,24 +6,18 @@ import {
   FaApple,
   FaLinux,
   FaAndroid,
+  FaDesktop,
+  FaGamepad,
 } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
-import { SiNintendo } from "react-icons/si";
+import { SiCommodore, SiNintendo, SiSega } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
-import { Icon } from "@chakra-ui/react";
+import { Icon, HStack } from "@chakra-ui/react";
 
 export interface PlatformIconListProps {
   // Define props here as needed
   platforms: Platform[];
 }
-
-// const platformIconList = ({ platforms }: PlatformIconListProps) => {
-//   return (
-//     <>
-//       <div>Platforms: {platforms.map((p) => p.name).join(", ")}</div>
-//     </>
-//   );
-// };
 
 const platformIconList: React.FC<{
   platforms?: { id?: number; name?: string; slug?: string }[];
@@ -40,27 +34,26 @@ const platformIconList: React.FC<{
     ios: MdPhoneIphone,
     android: FaAndroid,
     web: BsGlobe,
+    amiga: FaDesktop,
+    commodore: SiCommodore,
+    "commodore-amiga": SiCommodore,
+    sega: SiSega,
+    "neo-geo": FaGamepad,
+    atari: FaGamepad,
   };
 
   return (
-    <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+    <HStack className="platformIconList">
       {platforms.map((p) => (
         <div key={p.id ?? p.slug ?? p.name} title={p.name}>
           <Icon
             as={iconMaps[p.slug as keyof typeof iconMaps] || BsGlobe}
-            boxSize={5}
-            color="#444"
+            boxSize={4}
+            color="gray.500"
           />
         </div>
-        // <span
-        //   key={p.id ?? p.slug ?? p.name}
-        //   title={p.name}
-        //   style={{ fontSize: 12, color: "#444" }}
-        // >
-        //   {p.name}
-        // </span>
       ))}
-    </div>
+    </HStack>
   );
 };
 

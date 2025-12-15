@@ -15,7 +15,10 @@ export interface Game {
   metacritic?: number;
 }
 
-const useGames = (selectedGenre: Genre | null) => {
+const useGames = (
+  selectedGenre: Genre | null,
+  selectedPlatform: Platform | null
+) => {
   // FIX: Explicitly type queryConfig as Record<string, string>
   const queryConfig: Record<string, string> = {};
 
@@ -24,8 +27,16 @@ const useGames = (selectedGenre: Genre | null) => {
     queryConfig.genres = selectedGenre.id.toString();
   }
 
+  if (selectedPlatform) {
+    // TypeScript now knows this object can have string properties like 'platform'
+    queryConfig.parent_platforms = selectedPlatform.id.toString();
+  }
+
   // Pass the queryConfig object directly as the second argument.
-  return useData<Game>("/games", queryConfig, undefined, [selectedGenre?.id]);
+  return useData<Game>("/games", queryConfig, undefined, [
+    selectedGenre?.id,
+    selectedPlatform?.id,
+  ]);
 };
 
 export default useGames;

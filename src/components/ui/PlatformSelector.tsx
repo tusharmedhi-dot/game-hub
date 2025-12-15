@@ -2,6 +2,11 @@ import usePlatforms, { type Platform } from "@/hooks/usePlatforms"; // Ensure Pl
 import { Portal, Select, createListCollection } from "@chakra-ui/react";
 import { useMemo } from "react";
 
+interface Props {
+  onSelectPlatform: (platform: Platform) => void;
+  selectedPlatform: Platform | null;
+}
+
 // Define the expected structure for the list collection items
 interface SelectItem {
   label: string;
@@ -11,7 +16,7 @@ interface SelectItem {
 // Define an empty collection to use for loading/error states
 const EMPTY_COLLECTION = createListCollection<SelectItem>({ items: [] });
 
-const PlatformSelector = () => {
+const PlatformSelector = ({ onSelectPlatform }: Props) => {
   const { data, error, loading } = usePlatforms();
 
   // Memoize (cache) the transformed data to prevent unnecessary re-renders
@@ -51,6 +56,15 @@ const PlatformSelector = () => {
       collection={finalCollection} // Use the correct collection
       size="sm"
       width="320px"
+      // Handle selection here via lookup
+      onValueChange={(e) => {
+        const selectedId = e.value[0]; // Get the selected value string
+        const platform = data?.find((p) => p.id.toString() === selectedId); // Find original object
+        //console.log(platform);
+        if (platform) {
+          onSelectPlatform(platform); // Pass the full object to parent
+        }
+      }}
     >
       <Select.HiddenSelect />
       <Select.Control>

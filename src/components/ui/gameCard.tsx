@@ -19,12 +19,15 @@ const GameCard = ({ game }: GameCardProps) => {
       />
       <CardBody overflow="hidden" borderRadius={10}>
         {/* Additional card content can go here */}
-        <Heading size="md">{game.name}</Heading>
+
+        <HStack justifyContent="space-between" marginTop={2}>
+          <Heading size="md">{game.name}</Heading>
+          <CriticScore score={game.metacritic} />
+        </HStack>
         <HStack justifyContent="space-between" marginTop={2}>
           <PlatformIconList
             platforms={game.parent_platforms?.map((p) => p.platform)}
           />
-          <CriticScore score={game.metacritic} />
         </HStack>
       </CardBody>
     </CardRoot>
