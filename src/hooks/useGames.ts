@@ -1,6 +1,5 @@
 import type { GameQuery } from "@/App";
 import useData from "./useData";
-import type { Genre } from "./useGenre"; // Note: Removed the '.ts' suffix for clean import
 
 export interface Platform {
   id: number;
