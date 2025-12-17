@@ -33,6 +33,11 @@ const useGames = (
     queryConfig.parent_platforms = gameQuery.platform.id.toString();
   }
 
+  if (gameQuery.sortOrder) {
+    // TypeScript now knows this object can have string properties like 'platform'
+    queryConfig.ordering = gameQuery.sortOrder;
+  }
+
   // Pass the queryConfig object directly as the second argument.
   return useData<Game>("/games", queryConfig, undefined, [gameQuery]);
 };

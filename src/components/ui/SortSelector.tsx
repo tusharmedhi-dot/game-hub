@@ -7,40 +7,54 @@ interface SelectItem {
 }
 
 const dataItems: SelectItem[] = [
-  //{ label: "Order By: Relevance", value: "opt1" },
-  { label: "Relevance", value: "Relevance" },
-  { label: "Date Added", value: "Date Added" },
-  { label: "Name", value: "Name" },
-  { label: "Release Date", value: "Release Date" },
-  { label: "Popularity", value: "Popularity" },
-  { label: "Average Rating", value: "Average Rating" },
+  { label: "Relevance", value: "" },
+  { label: "Date Added", value: "-added" },
+  { label: "Name", value: "name" },
+  { label: "Release Date", value: "-release" },
+  { label: "Popularity", value: "-metacritic" },
+  { label: "Average Rating", value: "-rating" },
 ];
 
-const SortSelector = () => {
-  const [selectedValue, setSelectedValue] = useState<string>("opt2");
+interface Props {
+  onSelectSortOrder: (sortOrder: string) => void;
+}
+
+const SortSelector = ({ onSelectSortOrder }: Props) => {
+  const [selectedValue, setSelectedValue] = useState<string>("");
+
+  // Find the label of the currently selected item to show in the UI
+  const currentSortOrder = dataItems.find(
+    (item) => item.value === selectedValue
+  );
 
   return (
-    <Field.Root width="300px">
-      {/* <Field.Label htmlFor="sort-select">Sort Options</Field.Label> */}
+    <Field.Root width="fit-content">
       <NativeSelect.Root size="sm">
         <NativeSelect.Field
           id="sort-select"
-          // This explicitly gives the select an accessible name for audit tools
           title="Sort options"
           aria-label="Sort options"
-          placeholder="Select an option"
           value={selectedValue}
           onChange={(event) => {
-            setSelectedValue(event.target.value);
-            //console.log("Selected:", event.target.value);
+            const newValue = event.target.value;
+            setSelectedValue(newValue);
+            onSelectSortOrder(newValue);
           }}
         >
-          {/* <option value="Order By: Relevance">Order By: Relevance</option> */}
-          {dataItems.map((item) => (
-            <option key={item.value} value={item.value}>
-              {item.label}
-            </option>
-          ))}
+          {/* By setting the first option as the default "Order by" label, 
+            it stays visible when 'Relevance' (empty string) is selected.
+          */}
+          <option value="">Order by: Relevance</option>
+
+          {dataItems.map(
+            (item) =>
+              // We skip the empty string item here because we handled it above
+              item.value !== "" && (
+                <option key={item.value} value={item.value}>
+                  Order by: {item.label}
+                </option>
+              )
+          )}
         </NativeSelect.Field>
         <NativeSelect.Indicator />
       </NativeSelect.Root>
