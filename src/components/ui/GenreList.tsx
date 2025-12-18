@@ -6,6 +6,8 @@ import {
   Image,
   Spinner,
   Link,
+  Box,
+  Heading,
 } from "@chakra-ui/react";
 
 interface GenreListProps {
@@ -21,31 +23,33 @@ const GenreList = ({ onSelectGenre, selectedGenre }: GenreListProps) => {
 
   return (
     <>
-      <h6>
-        <strong>Genre List</strong>
-      </h6>
-      <List.Root listStyleType="none">
-        {data.map((g) =>
-          g.id !== undefined && g.id !== null ? (
-            <List.Item key={g.id} value={g.id} paddingY="5px">
-              <HStack>
-                <Image
-                  boxSize="32px"
-                  borderRadius={8}
-                  src={getCroppedImageUrl(g.image_background)}
-                />
-                <Link
-                  fontWeight={g.id === selectedGenre?.id ? "bold" : "normal"}
-                  fontSize="lg"
-                  onClick={() => onSelectGenre(g)}
-                >
-                  {g.name}
-                </Link>
-              </HStack>
-            </List.Item>
-          ) : null
-        )}
-      </List.Root>
+      <Box>
+        <Heading as="h1" marginBottom={3} marginTop={5}>
+          Genres
+        </Heading>
+        <List.Root listStyleType="none" aria-label="Game Genres">
+          {data.map((g) =>
+            g.id !== undefined && g.id !== null ? (
+              <List.Item key={g.id} value={g.id} paddingY="5px">
+                <HStack>
+                  <Image
+                    boxSize="32px"
+                    borderRadius={8}
+                    src={getCroppedImageUrl(g.image_background)}
+                  />
+                  <Link
+                    fontWeight={g.id === selectedGenre?.id ? "bold" : "normal"}
+                    fontSize="lg"
+                    onClick={() => onSelectGenre(g)}
+                  >
+                    {g.name}
+                  </Link>
+                </HStack>
+              </List.Item>
+            ) : null
+          )}
+        </List.Root>
+      </Box>
     </>
   );
 };
