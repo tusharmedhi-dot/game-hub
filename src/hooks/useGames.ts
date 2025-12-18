@@ -38,6 +38,11 @@ const useGames = (
     queryConfig.ordering = gameQuery.sortOrder;
   }
 
+  if (gameQuery.searchText) {
+    // RAWG API uses the parameter name 'search'
+    queryConfig.search = gameQuery.searchText;
+  }
+
   // Pass the queryConfig object directly as the second argument.
   return useData<Game>("/games", queryConfig, undefined, [gameQuery]);
 };
