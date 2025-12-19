@@ -4,6 +4,7 @@ import { Card, Heading, HStack, Image, AspectRatio } from "@chakra-ui/react";
 import PlatformIconList from "./platformIconList";
 import CriticScore from "./CriticScore";
 import getCroppedImageUrl from "@/services/image-url";
+import Emoji from "./Emoji";
 
 interface GameCardProps {
   game: Game;
@@ -26,15 +27,17 @@ const GameCard = ({ game }: GameCardProps) => {
 
       {/* 2. Change <CardBody> to <Card.Body> */}
       <Card.Body>
-        <HStack justifyContent="space-between" mb={2}>
-          <Heading size="md">{game.name}</Heading>
-          <CriticScore score={game.metacritic} />
-        </HStack>
-
         <HStack justifyContent="space-between">
           <PlatformIconList
             platforms={game.parent_platforms?.map((p) => p.platform)}
           />
+          <CriticScore score={game.metacritic} />
+        </HStack>
+        <HStack justifyContent="space-between" mb={2}>
+          <Heading size="md" display="inline">
+            {game.name}
+            <Emoji rating={game.rating_top} />
+          </Heading>
         </HStack>
       </Card.Body>
     </Card.Root>
