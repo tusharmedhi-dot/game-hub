@@ -36,7 +36,7 @@ const GameCard = ({ game }: GameCardProps) => {
         <HStack justifyContent="space-between" mb={2}>
           <Heading size="md" display="inline">
             {game.name}
-            <Emoji rating={game.rating_top} />
+            <Emoji rating={game.rating_top ?? 0} />
           </Heading>
         </HStack>
       </Card.Body>
