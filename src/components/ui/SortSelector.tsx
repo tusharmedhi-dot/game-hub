@@ -23,9 +23,9 @@ const SortSelector = ({ onSelectSortOrder }: Props) => {
   const [selectedValue, setSelectedValue] = useState<string>("");
 
   // Find the label of the currently selected item to show in the UI
-  const currentSortOrder = dataItems.find(
-    (item) => item.value === selectedValue
-  );
+  // const acurrentSortOrder = dataItems.find(
+  //   (item) => item.value === selectedValue
+  // );
 
   return (
     <Field.Root width="fit-content">

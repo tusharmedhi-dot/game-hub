@@ -9,7 +9,7 @@ interface Props {
 }
 
 const PlatformSelector = ({ onSelectPlatform }: Props) => {
-  const { data, error, loading } = usePlatforms();
+  const { data, error, isLoading } = usePlatforms();
 
   const selectItems = useMemo(() => {
     return (
@@ -20,7 +20,7 @@ const PlatformSelector = ({ onSelectPlatform }: Props) => {
     );
   }, [data]);
 
-  if (loading) return <div className="w-25">Loading platforms...</div>;
+  if (isLoading) return <div className="w-25">Loading platforms...</div>;
   if (error)
     return <div className="w-25 text-danger">Error fetching platforms.</div>;
 
